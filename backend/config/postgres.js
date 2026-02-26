@@ -2,10 +2,11 @@ const { Pool } = require("pg");
 
 const pool = new Pool({
   connectionString: process.env.POSTGRES_URL,
-  ssl: {
-    rejectUnauthorized: false,
-  },
+  ssl: { rejectUnauthorized: false },
+  connectionTimeoutMillis: 5000, // ADD THIS
+  idleTimeoutMillis: 10000, // ADD THIS
 });
+
 
 pool.on("connect", () => {
   console.log("PostgreSQL Connected");

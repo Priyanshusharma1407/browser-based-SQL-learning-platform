@@ -19,8 +19,13 @@ exports.executeQuery = async (req, res) => {
   }
 
   try {
-    const result = await pool.query(query);
+    let safeQuery = query;
 
+    if (!query.toLowerCase().includes("limit")) {
+      safeQuery += " LIMIT 100";
+    }
+
+    const result = await pool.query(safeQuery);
     res.json({
       columns: result.fields.map((field) => field.name),
       rows: result.rows,
