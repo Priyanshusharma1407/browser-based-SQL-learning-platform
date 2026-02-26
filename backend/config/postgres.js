@@ -7,4 +7,13 @@ const pool = new Pool({
   },
 });
 
+pool.on("connect", () => {
+  console.log("PostgreSQL Connected");
+});
+
+pool.on("error", (err) => {
+  console.error("Unexpected PG Error:", err);
+});
+
+
 module.exports = pool;

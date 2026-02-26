@@ -22,6 +22,7 @@ exports.executeQuery = async (req, res) => {
     const result = await pool.query(query);
 
     res.json({
+      columns: result.fields.map((field) => field.name),
       rows: result.rows,
     });
   } catch (error) {
