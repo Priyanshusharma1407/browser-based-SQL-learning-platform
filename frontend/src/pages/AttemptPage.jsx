@@ -13,8 +13,11 @@ const AttemptPage = () => {
   const [result, setResult] = useState(null);
   const [error, setError] = useState("");
   const [hint, setHint] = useState("");
+  const [hintUsed, setHintUsed] = useState(false);
 
   const getHint = async () => {
+    if (hintUsed) return;
+
     try {
       const res = await axios.post("http://localhost:5000/api/hint", {
         question: assignment.question,
@@ -23,6 +26,7 @@ const AttemptPage = () => {
       });
 
       setHint(res.data.hint);
+      setHintUsed(true); 
     } catch (err) {
       setHint("Failed to get hint.");
     }
@@ -68,7 +72,9 @@ const AttemptPage = () => {
         <button className="attempt__run-btn" onClick={runQuery}>
           Run Query
         </button>
-        <button onClick={getHint}>Get Hint</button>
+        <button onClick={getHint} disabled={hintUsed}>
+          {hintUsed ? "Hint Used" : "Get Hint"}
+        </button>
       </div>
 
       {error && <p className="attempt__error">{error}</p>}
