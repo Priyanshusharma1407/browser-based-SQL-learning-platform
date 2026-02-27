@@ -20,7 +20,7 @@ const SampleData = ({ table }) => {
   return (
     <div className="sample-data">
       <h3>Sample Data ({table})</h3>
-      <table border="1" cellPadding="6">
+      <table className="result-table" border="1" cellPadding="6">
         <thead>
           <tr>
             {columns.map((col) => (

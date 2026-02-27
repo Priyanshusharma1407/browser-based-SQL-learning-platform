@@ -2,3 +2,9 @@
 @import "./layout/layout";
 @import "./components/card";
 @import "./components/attempt";
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background: $bg;
+  color: $text-dark;
+}

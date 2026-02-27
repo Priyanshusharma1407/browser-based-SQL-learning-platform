@@ -3,7 +3,7 @@ const ResultTable = ({ data }) => {
 
   return (
     <div style={{ marginTop: "20px" }}>
-      <table border="1" cellPadding="8">
+      <table className="result-table"  border="1" cellPadding="8">
         <thead>
           <tr>
             {columns.map((col) => (
