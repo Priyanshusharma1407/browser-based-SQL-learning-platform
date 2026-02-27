@@ -8,6 +8,13 @@
   &__title {
     margin-bottom: 8px;
   }
+  
+  &__hint {
+  margin-top: 16px;
+  padding: 12px;
+  background: #fef9c3;
+  border-radius: $radius;
+}
 
   &__question {
     font-size: 14px;

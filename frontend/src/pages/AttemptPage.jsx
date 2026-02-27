@@ -12,6 +12,21 @@ const AttemptPage = () => {
   const [query, setQuery] = useState("");
   const [result, setResult] = useState(null);
   const [error, setError] = useState("");
+  const [hint, setHint] = useState("");
+
+  const getHint = async () => {
+    try {
+      const res = await axios.post("http://localhost:5000/api/hint", {
+        question: assignment.question,
+        userQuery: query,
+        error,
+      });
+
+      setHint(res.data.hint);
+    } catch (err) {
+      setHint("Failed to get hint.");
+    }
+  };
 
   useEffect(() => {
     axios
@@ -47,15 +62,22 @@ const AttemptPage = () => {
       </div>
 
       <SampleData table={assignment.tables[0]} />
-      
+
       <div className="attempt__editor">
         <SQLEditor query={query} setQuery={setQuery} />
         <button className="attempt__run-btn" onClick={runQuery}>
           Run Query
         </button>
+        <button onClick={getHint}>Get Hint</button>
       </div>
 
       {error && <p className="attempt__error">{error}</p>}
+      {hint && (
+        <div className="attempt__hint">
+          <strong>Hint:</strong>
+          <p>{hint}</p>
+        </div>
+      )}
 
       {result && (
         <div className="attempt__result">

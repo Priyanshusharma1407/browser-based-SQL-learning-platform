@@ -19,6 +19,11 @@ app.use("/api/assignments", assignmentRoutes);
 app.use("/api/query", queryRoutes);
 const PORT = process.env.PORT || 5000;
 
+const hintRoutes = require("./routes/hintRoutes");
+app.use("/api/hint", hintRoutes);
+
+console.log("API KEY:", process.env.GEMINI_API_KEY);
+
 const sampleRoutes = require("./routes/sampleRoutes");
 
 app.use("/api/sample", sampleRoutes);
